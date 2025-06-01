@@ -12,6 +12,7 @@ import InteractiveDemo from '../components/InteractiveDemo';
 import TestimonialsSection from '../components/TestimonialsSection';
 import PricingSection from '../components/PricingSection';
 import ContactSection from '../components/ContactSection';
+import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 
 // Register GSAP plugins
@@ -84,27 +85,26 @@ const Index = () => {
       <InteractiveDemo />
       <SVGAnimation />
       <TestimonialsSection />
-      <PricingSection />
-      <ContactSection />
       
-      {/* Stats section */}
+      {/* Enhanced Stats section with better design */}
       <section className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center relative overflow-hidden">
         <div className="text-center z-10">
           <h2 className="text-6xl font-bold mb-8 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Advanced Animations
+            Industry Leading Performance
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-12">
-            Experience the power of modern web animations with React and GSAP
+            Trusted by developers worldwide for creating exceptional web experiences
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             {[
-              { number: "10K+", label: "Happy Users" },
-              { number: "99.9%", label: "Uptime" },
-              { number: "50ms", label: "Response Time" },
-              { number: "24/7", label: "Support" }
+              { number: "50K+", label: "Active Developers", icon: "👩‍💻" },
+              { number: "99.9%", label: "Uptime SLA", icon: "⚡" },
+              { number: "15ms", label: "Avg Response Time", icon: "🚀" },
+              { number: "24/7", label: "Expert Support", icon: "🛟" }
             ].map((stat, index) => (
-              <div key={index} className="stat-item text-center">
+              <div key={index} className="stat-item text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300">
+                <div className="text-4xl mb-2">{stat.icon}</div>
                 <div className="text-4xl font-bold text-cyan-400 mb-2">{stat.number}</div>
                 <div className="text-gray-300">{stat.label}</div>
               </div>
@@ -112,23 +112,26 @@ const Index = () => {
           </div>
         </div>
         
-        {/* Floating elements */}
-        <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-2 h-2 bg-cyan-400 rounded-full opacity-60 animate-pulse"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 2}s`,
-                animationDuration: `${2 + Math.random() * 3}s`
-              }}
-            />
-          ))}
+        {/* Animated background grid */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="grid grid-cols-12 h-full">
+            {[...Array(144)].map((_, i) => (
+              <div
+                key={i}
+                className="border border-cyan-500 animate-pulse"
+                style={{
+                  animationDelay: `${Math.random() * 5}s`,
+                  animationDuration: `${2 + Math.random() * 3}s`
+                }}
+              />
+            ))}
+          </div>
         </div>
       </section>
       
+      <PricingSection />
+      <Newsletter />
+      <ContactSection />
       <Footer />
     </div>
   );
