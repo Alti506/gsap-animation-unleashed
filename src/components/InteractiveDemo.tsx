@@ -126,6 +126,61 @@ const InteractiveDemo = () => {
           ease: "back.out(1.7)"
         });
         break;
+
+      case 'wave':
+        const waveTl = gsap.timeline();
+        waveTl.to(boxRef.current, {
+          scaleY: 0.3,
+          scaleX: 1.4,
+          duration: 0.4,
+          ease: "power2.out"
+        })
+        .to(boxRef.current, {
+          scaleY: 1.6,
+          scaleX: 0.7,
+          duration: 0.3,
+          ease: "power2.out"
+        })
+        .to(boxRef.current, {
+          scaleY: 1,
+          scaleX: 1,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.3)"
+        });
+        break;
+
+      case 'glitch':
+        const glitchTl = gsap.timeline();
+        for (let i = 0; i < 8; i++) {
+          glitchTl.to(boxRef.current, {
+            x: Math.random() * 20 - 10,
+            y: Math.random() * 20 - 10,
+            rotation: Math.random() * 20 - 10,
+            duration: 0.05,
+            ease: "none"
+          });
+        }
+        glitchTl.to(boxRef.current, {
+          x: 0,
+          y: 0,
+          rotation: 0,
+          duration: 0.3,
+          ease: "back.out(1.7)"
+        });
+        break;
+
+      case 'spiral':
+        gsap.to(boxRef.current, {
+          motionPath: {
+            path: "M0,0 Q50,-100 100,0 Q150,100 200,0",
+            autoRotate: true
+          },
+          duration: 2,
+          ease: "power2.inOut",
+          yoyo: true,
+          repeat: 1
+        });
+        break;
     }
   };
 
@@ -159,7 +214,7 @@ const InteractiveDemo = () => {
         <div className="text-center mb-12">
           <Typography 
             variant="h2" 
-            className="mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+            className="mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent cursor-hover"
           >
             Professional Animation Playground
           </Typography>
@@ -194,14 +249,17 @@ const InteractiveDemo = () => {
           </div>
 
           {/* Animation controls */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl">
             {[
               { type: 'bounce', label: 'Elastic Bounce', icon: '⬆️', description: 'Physics-based bounce' },
               { type: 'rotate', label: 'Spin Transform', icon: '🌀', description: 'Multi-axis rotation' },
               { type: 'morph', label: 'Shape Morph', icon: '🎭', description: 'Fluid transitions' },
               { type: 'liquid', label: 'Liquid Motion', icon: '💧', description: 'Organic movement' },
               { type: 'physics', label: 'Physics Sim', icon: '⚡', description: 'Realistic dynamics' },
-              { type: 'magnetic', label: 'Magnetic Pull', icon: '🧲', description: 'Attraction forces' }
+              { type: 'magnetic', label: 'Magnetic Pull', icon: '🧲', description: 'Attraction forces' },
+              { type: 'wave', label: 'Wave Distort', icon: '🌊', description: 'Elastic deformation' },
+              { type: 'glitch', label: 'Glitch Effect', icon: '📺', description: 'Digital disruption' },
+              { type: 'spiral', label: 'Motion Path', icon: '🌀', description: 'Complex trajectories' }
             ].map((animation) => (
               <Button
                 key={animation.type}

@@ -16,6 +16,7 @@ import ContactSection from '../components/ContactSection';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import Typography from '../components/Typography';
+import CursorEffect from '../components/CursorEffect';
 import { Container, Section } from '../components/Layout';
 
 // Register GSAP plugins
@@ -82,6 +83,7 @@ const Index = () => {
   return (
     <div ref={containerRef} className="relative min-h-screen bg-slate-950 text-white">
       <ParticleBackground />
+      <CursorEffect />
       <Navigation />
       <EnhancedHero />
       <EnhancedAnimatedSection />
@@ -94,7 +96,7 @@ const Index = () => {
           <div className="text-center">
             <Typography 
               variant="h2" 
-              className="mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
+              className="mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent cursor-hover"
             >
               Trusted by Developers Worldwide
             </Typography>
