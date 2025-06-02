@@ -4,20 +4,16 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TextPlugin } from 'gsap/TextPlugin';
 import Navigation from '../components/Navigation';
-import EnhancedHero from '../components/EnhancedHero';
-import EnhancedAnimatedSection from '../components/EnhancedAnimatedSection';
-import CursorFollowSVG from '../components/CursorFollowSVG';
+import Hero from '../components/Hero';
+import AnimatedSection from '../components/AnimatedSection';
+import SVGAnimation from '../components/SVGAnimation';
 import ParticleBackground from '../components/ParticleBackground';
 import InteractiveDemo from '../components/InteractiveDemo';
-import AdvancedAnimationsShowcase from '../components/AdvancedAnimationsShowcase';
 import TestimonialsSection from '../components/TestimonialsSection';
 import PricingSection from '../components/PricingSection';
 import ContactSection from '../components/ContactSection';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
-import Typography from '../components/Typography';
-import CursorEffect from '../components/CursorEffect';
-import { Container, Section } from '../components/Layout';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
@@ -26,47 +22,47 @@ const Index = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Add error handling for GSAP
     try {
-      // Smooth page entry
+      // Smooth scroll setup
       gsap.set("body", { overflow: "hidden" });
-      gsap.to("body", { overflow: "auto", delay: 1.5 });
+      gsap.to("body", { overflow: "auto", delay: 2 });
 
-      // Enhanced navigation animation
+      // Page load animation with error handling
+      const tl = gsap.timeline();
+      
+      // Check if elements exist before animating
       const navItems = document.querySelectorAll(".nav-item");
       if (navItems.length > 0) {
-        gsap.fromTo(navItems, 
-          { y: -30, opacity: 0 },
-          { 
-            y: 0, 
-            opacity: 1, 
-            duration: 0.6, 
-            stagger: 0.08, 
-            ease: "power2.out", 
-            delay: 0.8 
-          }
-        );
+        tl.from(".nav-item", {
+          duration: 0.8,
+          y: -50,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "power3.out",
+          delay: 0.5
+        });
       }
 
-      // Subtle section reveals
+      // Global scroll-triggered animations
       const sections = document.querySelectorAll('section');
-      sections.forEach((section) => {
+      sections.forEach((section, index) => {
         gsap.fromTo(section, 
-          { opacity: 0.9 },
+          { opacity: 0.8 },
           {
             scrollTrigger: {
               trigger: section,
-              start: "top 90%",
-              end: "top 30%",
+              start: "top 80%",
+              end: "bottom 20%",
               toggleActions: "play none none reverse"
             },
             opacity: 1,
-            duration: 0.8,
-            ease: "power1.out"
+            duration: 1
           }
         );
       });
 
-      console.log("Enhanced GSAP animations initialized");
+      console.log("GSAP animations initialized successfully");
     } catch (error) {
       console.error("Error initializing GSAP animations:", error);
     }
@@ -81,51 +77,58 @@ const Index = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative min-h-screen bg-slate-950 text-white">
+    <div ref={containerRef} className="relative min-h-screen">
       <ParticleBackground />
-      <CursorEffect />
       <Navigation />
-      <EnhancedHero />
-      <EnhancedAnimatedSection />
+      <Hero />
+      <AnimatedSection />
       <InteractiveDemo />
-      <CursorFollowSVG />
-      
-      {/* Enhanced Stats Section */}
-      <Section className="bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900">
-        <Container>
-          <div className="text-center">
-            <Typography 
-              variant="h2" 
-              className="mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent cursor-hover"
-            >
-              Trusted by Developers Worldwide
-            </Typography>
-            <Typography 
-              variant="body" 
-              className="text-gray-300 max-w-2xl mx-auto mb-16"
-            >
-              Join thousands of developers creating exceptional web experiences
-            </Typography>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-              {[
-                { number: "50K+", label: "Active Developers", icon: "👩‍💻" },
-                { number: "99.9%", label: "Uptime SLA", icon: "⚡" },
-                { number: "15ms", label: "Response Time", icon: "🚀" },
-                { number: "24/7", label: "Expert Support", icon: "🛟" }
-              ].map((stat, index) => (
-                <div key={index} className="stat-item text-center bg-white/5 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
-                  <div className="text-3xl mb-3">{stat.icon}</div>
-                  <Typography variant="h3" className="text-cyan-400 mb-2">{stat.number}</Typography>
-                  <Typography variant="caption" className="text-gray-400">{stat.label}</Typography>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </Section>
-      
+      <SVGAnimation />
       <TestimonialsSection />
+      
+      {/* Enhanced Stats section with better design */}
+      <section className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center relative overflow-hidden">
+        <div className="text-center z-10">
+          <h2 className="text-6xl font-bold mb-8 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            Industry Leading Performance
+          </h2>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-12">
+            Trusted by developers worldwide for creating exceptional web experiences
+          </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            {[
+              { number: "50K+", label: "Active Developers", icon: "👩‍💻" },
+              { number: "99.9%", label: "Uptime SLA", icon: "⚡" },
+              { number: "15ms", label: "Avg Response Time", icon: "🚀" },
+              { number: "24/7", label: "Expert Support", icon: "🛟" }
+            ].map((stat, index) => (
+              <div key={index} className="stat-item text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300">
+                <div className="text-4xl mb-2">{stat.icon}</div>
+                <div className="text-4xl font-bold text-cyan-400 mb-2">{stat.number}</div>
+                <div className="text-gray-300">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Animated background grid */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="grid grid-cols-12 h-full">
+            {[...Array(144)].map((_, i) => (
+              <div
+                key={i}
+                className="border border-cyan-500 animate-pulse"
+                style={{
+                  animationDelay: `${Math.random() * 5}s`,
+                  animationDuration: `${2 + Math.random() * 3}s`
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+      
       <PricingSection />
       <Newsletter />
       <ContactSection />
