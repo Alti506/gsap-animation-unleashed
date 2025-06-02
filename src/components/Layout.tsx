@@ -6,25 +6,17 @@ interface LayoutProps {
   className?: string;
 }
 
-export const Container = React.forwardRef<HTMLDivElement, LayoutProps>(
-  ({ children, className = '' }, ref) => (
-    <div ref={ref} className={`max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 ${className}`}>
-      {children}
-    </div>
-  )
+export const Container: React.FC<LayoutProps> = ({ children, className = '' }) => (
+  <div className={`max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 ${className}`}>
+    {children}
+  </div>
 );
 
-Container.displayName = 'Container';
-
-export const Section = React.forwardRef<HTMLElement, LayoutProps>(
-  ({ children, className = '' }, ref) => (
-    <section ref={ref} className={`py-16 md:py-24 ${className}`}>
-      {children}
-    </section>
-  )
+export const Section: React.FC<LayoutProps> = ({ children, className = '' }) => (
+  <section className={`py-16 md:py-24 ${className}`}>
+    {children}
+  </section>
 );
-
-Section.displayName = 'Section';
 
 export const Grid: React.FC<{ cols?: string; gap?: string; children: React.ReactNode; className?: string }> = ({ 
   cols = 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3', 
