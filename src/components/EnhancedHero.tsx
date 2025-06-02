@@ -12,59 +12,96 @@ const EnhancedHero = () => {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const typewriterRef = useRef<HTMLSpanElement>(null);
+  const backgroundRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(TextPlugin);
 
-    const tl = gsap.timeline({ delay: 0.5 });
+    const tl = gsap.timeline({ delay: 0.8 });
     
     try {
-      // Refined entrance animations with better easing
-      tl.fromTo(titleRef.current, 
-        { opacity: 0, y: 60 },
-        { duration: 1, opacity: 1, y: 0, ease: "power2.out" }
-      )
-      .fromTo(subtitleRef.current,
-        { opacity: 0, y: 40 },
-        { duration: 0.8, opacity: 1, y: 0, ease: "power2.out" }, 
-        "-=0.6"
+      // Enhanced background animation
+      if (backgroundRef.current) {
+        gsap.fromTo(backgroundRef.current, 
+          { scale: 1.2, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 2, ease: "power2.out" }
+        );
+      }
+
+      // Staggered text reveals with enhanced effects
+      const titleWords = titleRef.current?.children;
+      if (titleWords) {
+        gsap.set(titleWords, { y: 100, opacity: 0, rotateX: 90 });
+        tl.to(titleWords, {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: "power3.out"
+        });
+      }
+
+      tl.fromTo(subtitleRef.current,
+        { opacity: 0, y: 60, scale: 0.9 },
+        { 
+          duration: 1, 
+          opacity: 1, 
+          y: 0, 
+          scale: 1,
+          ease: "power2.out" 
+        }, 
+        "-=0.8"
       )
       .fromTo(buttonRef.current,
-        { opacity: 0, scale: 0.9 },
-        { duration: 0.6, opacity: 1, scale: 1, ease: "back.out(1.2)" }, 
-        "-=0.4"
+        { opacity: 0, scale: 0, rotation: 180 },
+        { 
+          duration: 0.8, 
+          opacity: 1, 
+          scale: 1, 
+          rotation: 0,
+          ease: "back.out(1.7)" 
+        }, 
+        "-=0.6"
       );
 
-      // Subtle floating animation
+      // Enhanced floating animation with multiple elements
       gsap.to(heroRef.current, {
-        y: -10,
+        y: -15,
         duration: 4,
         ease: "power1.inOut",
         yoyo: true,
         repeat: -1
       });
 
-      // Enhanced typewriter effect
-      const words = ["Beautiful", "Smooth", "Modern", "Engaging"];
+      // Dynamic typewriter effect with smooth transitions
+      const words = ["Beautiful", "Smooth", "Modern", "Engaging", "Interactive"];
       let currentWord = 0;
 
       const typewriterAnimation = () => {
         if (typewriterRef.current) {
           gsap.to(typewriterRef.current, {
-            duration: 0.8,
-            text: words[currentWord],
-            ease: "power2.out",
+            duration: 0.1,
+            text: "",
+            ease: "none",
             onComplete: () => {
-              setTimeout(() => {
-                currentWord = (currentWord + 1) % words.length;
-                typewriterAnimation();
-              }, 2500);
+              gsap.to(typewriterRef.current, {
+                duration: 1.2,
+                text: words[currentWord],
+                ease: "power2.out",
+                onComplete: () => {
+                  setTimeout(() => {
+                    currentWord = (currentWord + 1) % words.length;
+                    typewriterAnimation();
+                  }, 2800);
+                }
+              });
             }
           });
         }
       };
 
-      setTimeout(typewriterAnimation, 1500);
+      setTimeout(typewriterAnimation, 2000);
 
     } catch (error) {
       console.error("Error in Enhanced Hero animation:", error);
@@ -74,7 +111,7 @@ const EnhancedHero = () => {
   const handleExploreClick = () => {
     try {
       gsap.to(window, {
-        duration: 1.2,
+        duration: 1.5,
         scrollTo: { y: window.innerHeight, autoKill: false },
         ease: "power2.inOut"
       });
@@ -86,58 +123,84 @@ const EnhancedHero = () => {
   return (
     <header 
       ref={heroRef}
-      className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(120,119,198,0.3),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,105,180,0.3),transparent_50%)]" />
+      {/* Enhanced animated background */}
+      <div 
+        ref={backgroundRef}
+        className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+      >
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(120,119,198,0.4),transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,105,180,0.4),transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_80%,rgba(99,102,241,0.3),transparent_60%)]" />
+        </div>
+        
+        {/* Animated particles */}
+        {[...Array(60)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full opacity-30"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `twinkle ${2 + Math.random() * 4}s infinite ${Math.random() * 3}s ease-in-out`
+            }}
+          />
+        ))}
       </div>
 
       <Container className="text-center relative z-10">
-        <div className="max-w-4xl mx-auto space-y-8">
+        <div className="max-w-5xl mx-auto space-y-8">
           <Typography 
             variant="h1" 
             ref={titleRef}
             className="bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent"
           >
-            Create <span ref={typewriterRef} className="text-purple-300">Beautiful</span><br />
-            Web Experiences
+            <span className="block">Create</span>
+            <span ref={typewriterRef} className="text-purple-300 block">Beautiful</span>
+            <span className="block">Web Experiences</span>
           </Typography>
           
           <Typography 
             variant="body" 
             ref={subtitleRef}
-            className="text-gray-300 max-w-2xl mx-auto"
+            className="text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
             Craft stunning, high-performance web animations with modern React and GSAP. 
-            Bring your digital experiences to life with smooth, purposeful motion.
+            Bring your digital experiences to life with smooth, purposeful motion that engages and delights.
           </Typography>
           
-          <div className="pt-4">
+          <div className="pt-6">
             <EnhancedButton 
               ref={buttonRef}
               onClick={handleExploreClick}
               size="lg"
-              className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+              className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 hover:shadow-purple-500/25"
             >
               Explore Our Work ✨
             </EnhancedButton>
           </div>
 
-          <div className="grid grid-cols-3 gap-8 pt-12 max-w-md mx-auto text-center">
-            <div>
-              <div className="text-2xl font-bold text-purple-400 mb-1">60fps</div>
-              <div className="text-sm text-gray-400">Performance</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-indigo-400 mb-1">Modern</div>
-              <div className="text-sm text-gray-400">Standards</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-pink-400 mb-1">Smooth</div>
-              <div className="text-sm text-gray-400">Animations</div>
-            </div>
+          {/* Enhanced stats grid */}
+          <div className="grid grid-cols-3 gap-8 pt-16 max-w-lg mx-auto">
+            {[
+              { label: "60fps", desc: "Performance", color: "text-purple-400" },
+              { label: "Modern", desc: "Standards", color: "text-indigo-400" },
+              { label: "Smooth", desc: "Animations", color: "text-pink-400" }
+            ].map((stat, index) => (
+              <div 
+                key={index} 
+                className="text-center group hover:scale-110 transition-transform duration-300"
+              >
+                <div className={`text-2xl font-bold ${stat.color} mb-2 group-hover:animate-pulse`}>
+                  {stat.label}
+                </div>
+                <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
+                  {stat.desc}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </Container>
