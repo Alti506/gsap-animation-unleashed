@@ -9,6 +9,7 @@ import EnhancedAnimatedSection from '../components/EnhancedAnimatedSection';
 import CursorFollowSVG from '../components/CursorFollowSVG';
 import ParticleBackground from '../components/ParticleBackground';
 import InteractiveDemo from '../components/InteractiveDemo';
+import AdvancedAnimationsShowcase from '../components/AdvancedAnimationsShowcase';
 import TestimonialsSection from '../components/TestimonialsSection';
 import PricingSection from '../components/PricingSection';
 import ContactSection from '../components/ContactSection';

@@ -20,7 +20,14 @@ const Typography: React.FC<TypographyProps> = ({ variant = 'body', children, cla
     button: 'text-sm md:text-base font-medium tracking-wide'
   };
 
-  const Tag = variant.startsWith('h') ? variant as keyof JSX.IntrinsicElements : 'p';
+  const getTag = (): keyof JSX.IntrinsicElements => {
+    if (variant === 'h1' || variant === 'h2' || variant === 'h3' || variant === 'h4') {
+      return variant;
+    }
+    return 'p';
+  };
+
+  const Tag = getTag();
 
   return (
     <Tag className={`${baseClasses} ${variants[variant]} ${className}`}>
