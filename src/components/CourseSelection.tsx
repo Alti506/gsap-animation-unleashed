@@ -68,18 +68,18 @@ const CourseSelection: React.FC<CourseSelectionProps> = ({ onCourseSelect, onClo
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div 
         ref={containerRef}
-        className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+        className="bg-slate-800 border border-purple-500/30 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
       >
         <div className="p-8">
           <div className="flex justify-between items-center mb-8">
-            <Typography variant="h2" className="text-gray-800">
+            <Typography variant="h2" className="text-purple-300">
               Languages
             </Typography>
             <button 
               onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+              className="p-2 hover:bg-purple-600/20 rounded-full transition-colors duration-200"
             >
-              <X size={24} className="text-gray-600" />
+              <X size={24} className="text-gray-300" />
             </button>
           </div>
 
@@ -88,31 +88,31 @@ const CourseSelection: React.FC<CourseSelectionProps> = ({ onCourseSelect, onClo
               <div
                 key={course.id}
                 onClick={() => onCourseSelect(course)}
-                className="bg-gray-50 hover:bg-gray-100 rounded-2xl p-6 cursor-pointer transition-all duration-200 hover:scale-[1.02] hover:shadow-lg border-2 border-transparent hover:border-green-200 group"
+                className="bg-slate-700/50 hover:bg-purple-900/30 rounded-2xl p-6 cursor-pointer transition-all duration-200 hover:scale-[1.02] hover:shadow-lg border-2 border-transparent hover:border-purple-500/50 group"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className="text-4xl">{course.icon}</div>
                     <div>
                       <div className="flex items-center space-x-3">
-                        <Typography variant="h4" className="text-gray-800 group-hover:text-green-600 transition-colors duration-200">
+                        <Typography variant="h4" className="text-gray-200 group-hover:text-purple-300 transition-colors duration-200">
                           {course.name}
                         </Typography>
                         {course.recommended && (
-                          <span className="bg-green-100 text-green-600 text-xs font-bold px-2 py-1 rounded-full">
+                          <span className="bg-purple-600/20 text-purple-300 text-xs font-bold px-2 py-1 rounded-full border border-purple-400/30">
                             RECOMMENDED
                           </span>
                         )}
                       </div>
                       {course.prerequisite && (
-                        <Typography variant="caption" className="text-gray-500">
+                        <Typography variant="caption" className="text-gray-400">
                           {course.prerequisite}
                         </Typography>
                       )}
                     </div>
                   </div>
-                  <div className="bg-white rounded-full px-4 py-2 border border-gray-200">
-                    <Typography variant="caption" className="text-gray-600 font-medium">
+                  <div className="bg-slate-600/50 rounded-full px-4 py-2 border border-gray-500/30">
+                    <Typography variant="caption" className="text-gray-300 font-medium">
                       {course.progress}
                     </Typography>
                   </div>

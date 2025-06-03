@@ -66,20 +66,26 @@ const CodeingoHero: React.FC<CodeingoHeroProps> = ({ onLoginClick, onSignUpClick
   return (
     <header 
       ref={heroRef}
-      className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-green-50 via-white to-blue-50"
+      className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
     >
+      {/* Background pattern matching original GSAP React colors */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(120,119,198,0.4),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.4),transparent_50%)]" />
+      </div>
+
       <Container className="text-center relative z-10">
         <div className="max-w-4xl mx-auto space-y-8">
           <div ref={logoRef} className="flex justify-center mb-8">
-            <div className="bg-white rounded-full p-6 shadow-xl border-4 border-green-100">
-              <Bot size={80} className="text-gray-800" />
+            <div className="bg-white/10 backdrop-blur-sm rounded-full p-6 shadow-xl border border-purple-300/30">
+              <Bot size={80} className="text-purple-300" />
             </div>
           </div>
           
           <Typography 
             variant="h1" 
             ref={titleRef}
-            className="text-green-600 font-black"
+            className="bg-gradient-to-r from-purple-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent font-black"
           >
             free. fun. effective.
           </Typography>
@@ -87,16 +93,16 @@ const CodeingoHero: React.FC<CodeingoHeroProps> = ({ onLoginClick, onSignUpClick
           <Typography 
             variant="body" 
             ref={subtitleRef}
-            className="text-gray-600 max-w-3xl mx-auto text-xl leading-relaxed"
+            className="text-gray-300 max-w-3xl mx-auto text-xl leading-relaxed"
           >
-            Learning with Codeingo is fun, and <span className="text-blue-500 font-semibold">research shows that it works!</span> With quick, bite-sized lessons, you'll earn points and unlock new levels while gaining real-world programming skills.
+            Learning with Codeingo is fun, and <span className="text-indigo-400 font-semibold">research shows that it works!</span> With quick, bite-sized lessons, you'll earn points and unlock new levels while gaining real-world programming skills.
           </Typography>
           
           <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 pt-8 justify-center">
             <EnhancedButton 
               onClick={onSignUpClick}
               size="lg"
-              className="bg-green-500 hover:bg-green-600 text-white font-bold px-12 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+              className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold px-12 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
             >
               GET STARTED
             </EnhancedButton>
@@ -105,7 +111,7 @@ const CodeingoHero: React.FC<CodeingoHeroProps> = ({ onLoginClick, onSignUpClick
               onClick={onLoginClick}
               variant="outline"
               size="lg"
-              className="border-2 border-green-500 text-green-600 hover:bg-green-50 font-bold px-12 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+              className="border-2 border-purple-400 text-purple-300 hover:bg-purple-900/30 font-bold px-12 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
             >
               I ALREADY HAVE AN ACCOUNT
             </EnhancedButton>
@@ -113,16 +119,16 @@ const CodeingoHero: React.FC<CodeingoHeroProps> = ({ onLoginClick, onSignUpClick
 
           <div className="grid grid-cols-3 gap-8 pt-16 max-w-md mx-auto text-center">
             <div>
-              <div className="text-2xl font-bold text-green-500 mb-1">Effective</div>
-              <div className="text-sm text-gray-500">Research-backed</div>
+              <div className="text-2xl font-bold text-purple-400 mb-1">Effective</div>
+              <div className="text-sm text-gray-400">Research-backed</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-blue-500 mb-1">Personalized</div>
-              <div className="text-sm text-gray-500">AI-powered</div>
+              <div className="text-2xl font-bold text-indigo-400 mb-1">Personalized</div>
+              <div className="text-sm text-gray-400">AI-powered</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-purple-500 mb-1">Fun</div>
-              <div className="text-sm text-gray-500">Game-like</div>
+              <div className="text-2xl font-bold text-pink-400 mb-1">Fun</div>
+              <div className="text-sm text-gray-400">Game-like</div>
             </div>
           </div>
         </div>

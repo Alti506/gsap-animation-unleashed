@@ -65,7 +65,7 @@ const EnhancedAnimatedSection = () => {
   ];
 
   return (
-    <Section ref={sectionRef} className="bg-gradient-to-b from-slate-900 to-black">
+    <Section className="bg-gradient-to-b from-slate-900 to-black">
       <Container>
         <div className="text-center mb-16">
           <Typography 
