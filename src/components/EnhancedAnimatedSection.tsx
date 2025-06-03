@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Typography from './Typography';
-import { Container, Grid, Card } from './Layout';
+import { Container, Section, Grid, Card } from './Layout';
 
 const EnhancedAnimatedSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -65,7 +65,7 @@ const EnhancedAnimatedSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="bg-gradient-to-b from-slate-900 to-black py-16 md:py-24">
+    <Section ref={sectionRef} className="bg-gradient-to-b from-slate-900 to-black">
       <Container>
         <div className="text-center mb-16">
           <Typography 
@@ -104,7 +104,7 @@ const EnhancedAnimatedSection = () => {
           ))}
         </Grid>
       </Container>
-    </section>
+    </Section>
   );
 };
 
