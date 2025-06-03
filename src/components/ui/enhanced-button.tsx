@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
 interface EnhancedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,13 +8,13 @@ interface EnhancedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
   children: React.ReactNode;
 }
 
-const EnhancedButton: React.FC<EnhancedButtonProps> = ({ 
+const EnhancedButton = forwardRef<HTMLButtonElement, EnhancedButtonProps>(({ 
   variant = 'primary', 
   size = 'md', 
   children, 
   className,
   ...props 
-}) => {
+}, ref) => {
   const baseClasses = `
     inline-flex items-center justify-center font-medium 
     transition-all duration-200 ease-out
@@ -56,12 +56,15 @@ const EnhancedButton: React.FC<EnhancedButtonProps> = ({
 
   return (
     <button
+      ref={ref}
       className={cn(baseClasses, variants[variant], sizes[size], className)}
       {...props}
     >
       {children}
     </button>
   );
-};
+});
+
+EnhancedButton.displayName = 'EnhancedButton';
 
 export default EnhancedButton;

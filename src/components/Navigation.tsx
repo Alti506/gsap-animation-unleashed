@@ -1,44 +1,32 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Bot } from 'lucide-react';
 
 const Navigation = () => {
   const location = useLocation();
 
-  const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'About', path: '/about' },
-    { name: 'Resources', path: '/resources' }
-  ];
-
   return (
-    <nav className="fixed top-0 w-full px-8 py-4 bg-black/80 backdrop-blur-md flex justify-between items-center z-50 border-b border-white/10">
+    <nav className="fixed top-0 w-full px-8 py-4 bg-white/90 backdrop-blur-md flex justify-between items-center z-50 border-b border-gray-100 shadow-sm">
       <div className="nav-item">
-        <Link to="/">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
-            GSAP React
+        <Link to="/" className="flex items-center space-x-3">
+          <div className="bg-gray-100 rounded-full p-2">
+            <Bot size={32} className="text-gray-800" />
+          </div>
+          <h2 className="text-2xl font-bold text-green-600">
+            Codeingo
           </h2>
         </Link>
       </div>
       
-      <ul className="flex gap-8">
-        {navItems.map((item, index) => (
-          <li key={item.name} className="nav-item">
-            <Link
-              to={item.path}
-              className={`text-white font-semibold hover:text-pink-400 transition-colors duration-300 relative group ${
-                location.pathname === item.path ? 'text-pink-400' : ''
-              }`}
-            >
-              {item.name}
-              <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-pink-500 to-violet-500 transition-all duration-300 ${
-                location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'
-              }`}></span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="flex items-center space-x-4">
+        <Link
+          to="/"
+          className="text-gray-600 hover:text-green-600 font-medium transition-colors duration-200"
+        >
+          Home
+        </Link>
+      </div>
     </nav>
   );
 };

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 interface TypographyProps {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'caption' | 'button';
@@ -7,7 +7,7 @@ interface TypographyProps {
   className?: string;
 }
 
-const Typography: React.FC<TypographyProps> = ({ variant = 'body', children, className = '' }) => {
+const Typography = forwardRef<HTMLElement, TypographyProps>(({ variant = 'body', children, className = '' }, ref) => {
   const baseClasses = 'font-inter leading-relaxed';
   
   const variants = {
@@ -20,13 +20,15 @@ const Typography: React.FC<TypographyProps> = ({ variant = 'body', children, cla
     button: 'text-sm md:text-base font-medium tracking-wide'
   };
 
-  const Tag = variant.startsWith('h') ? variant as keyof JSX.IntrinsicElements : 'p';
+  const Tag = variant.startsWith('h') ? variant as 'h1' | 'h2' | 'h3' | 'h4' : 'p';
 
   return (
-    <Tag className={`${baseClasses} ${variants[variant]} ${className}`}>
+    <Tag ref={ref as any} className={`${baseClasses} ${variants[variant]} ${className}`}>
       {children}
     </Tag>
   );
-};
+});
+
+Typography.displayName = 'Typography';
 
 export default Typography;
