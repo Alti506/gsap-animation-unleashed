@@ -1,32 +1,44 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Bot } from 'lucide-react';
 
 const Navigation = () => {
   const location = useLocation();
 
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Portfolio', path: '/portfolio' },
+    { name: 'About', path: '/about' },
+    { name: 'Resources', path: '/resources' }
+  ];
+
   return (
-    <nav className="fixed top-0 w-full px-8 py-4 bg-slate-900/90 backdrop-blur-md flex justify-between items-center z-50 border-b border-purple-500/20 shadow-sm">
+    <nav className="fixed top-0 w-full px-8 py-4 bg-black/80 backdrop-blur-md flex justify-between items-center z-50 border-b border-white/10">
       <div className="nav-item">
-        <Link to="/" className="flex items-center space-x-3">
-          <div className="bg-purple-600/20 rounded-full p-2 border border-purple-400/30">
-            <Bot size={32} className="text-purple-300" />
-          </div>
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-300 to-indigo-300 bg-clip-text text-transparent">
-            Codeingo
+        <Link to="/">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
+            GSAP React
           </h2>
         </Link>
       </div>
       
-      <div className="flex items-center space-x-4">
-        <Link
-          to="/"
-          className="text-gray-300 hover:text-purple-300 font-medium transition-colors duration-200"
-        >
-          Home
-        </Link>
-      </div>
+      <ul className="flex gap-8">
+        {navItems.map((item, index) => (
+          <li key={item.name} className="nav-item">
+            <Link
+              to={item.path}
+              className={`text-white font-semibold hover:text-pink-400 transition-colors duration-300 relative group ${
+                location.pathname === item.path ? 'text-pink-400' : ''
+              }`}
+            >
+              {item.name}
+              <span className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-pink-500 to-violet-500 transition-all duration-300 ${
+                location.pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'
+              }`}></span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 };
